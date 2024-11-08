@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f0f4f8, #e0e7ef);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            background-color: #30475e;
+            padding: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav a {
+            color: #f3f4f6;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin: 0 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            background-color: #f05454;
+            transform: scale(1.1);
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+        form:hover {
+            transform: translateY(-5px);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="date"],
+        input[type="time"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 5px rgba(231, 76, 108, 0.5);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        #reservation-success {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+            animation: sparkle 1s forwards;
+        }
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        #receipt {
+            display: none;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #receipt h2 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        #receipt-list {
+            max-width: 600px;
+            margin: 20px auto;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .receipt-item {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+        .waiting {
+            background-color: #e74c3c; 
+        }
+        .occupied {
+            background-color: #5cb85c; 
+        }
+        #next-receipt {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            padding: 10px 15px;
+            background-color: #e0e7ef;
+            color: #333;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+        }
+        #reset-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+    <h1>Make a Reservation</h1>
+    <form id="reservation-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+
+        <label for="guests">Number of Guests:</label>
+        <input type="number" id="guests" name="guests" required min="1" max="20">
+
+        <label for="seating">Preferred Seating:</label>
+        <select id="seating" name="seating">
+            <option value="Indoor">Indoor</option>
+            <option value="Outdoor">Outdoor</option>
+            <option value="No preference">No Preference</option>
+        </select>
+
+        <label for="requests">Special Requests:</label>
+        <textarea id="requests" name="requests" rows="4"></textarea>
+
+        <button type="submit">Make a Reservation</button>
+    </form>
+
+    <div id="reservation-success">
+        <p>Thank you for making a reservation!</p>
+    </div>
+
+    <div id="receipt" class="receipt">
+        <h2>Reservation Receipt</h2>
+        <p id="receipt-details"></p>
+    </div>
+
+    <div id="receipt-list">
+        <h2>Stored Receipts</h2>
+        <div id="receipts-container"></div>
+        <div id="next-receipt">Next Receipt Number: <span id="next-receipt-number">1</span></div>
+    </div>
+
+    <button id="reset-button">Reset All</button>
+
+    <script>
+        let receiptNumber = 1;
+        const receipts = [];
+
+        document.getElementById("reservation-form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const guests = document.getElementById("guests").value;
+            const seating = document.getElementById("seating").value;
+            const requests = document.getElementById("requests").value;
+
+            document.getElementById("reservation-success").style.display = "block";
+
+            const receiptDetails = `
+                Receipt Number: ${receiptNumber}<br>
+                Name: ${name}<br>
+                Phone: ${phone}<br>
+                Email: ${email}<br>
+                Date: ${date}<br>
+                Time: ${time}<br>
+                Guests: ${guests}<br>
+                Seating: ${seating}<br>
+                Special Requests: ${requests || "None"}
+            `;
+            document.getElementById("receipt-details").innerHTML = receiptDetails;
+            document.getElementById("receipt").style.display = "block";
+
+            receipts.push({
+                number: receiptNumber,
+                details: receiptDetails,
+                occupied: false
+            });
+            updateReceiptsContainer();
+            receiptNumber++;
+            document.getElementById("next-receipt-number").innerText = receiptNumber;
+
+            this.reset();
+        });
+
+        function updateReceiptsContainer() {
+            const receiptsContainer = document.getElementById("receipts-container");
+            receiptsContainer.innerHTML = ""; 
+            receipts.forEach(receipt => {
+                const receiptDiv = document.createElement("div");
+                receiptDiv.className = "receipt-item";
+                receiptDiv.innerHTML = `
+                    <div>
+                        <div class="status ${receipt.occupied ? 'occupied' : 'waiting'}">
+                            ${receipt.occupied ? "Occupied" : "Waiting"}
+                        </div>
+                        ${receipt.details}
+                    </div>
+                    <button onclick="markOccupied(${receipt.number})" style="margin-top: 10px;">Mark as Occupied</button>
+                `;
+                receiptsContainer.appendChild(receiptDiv);
+            });
+        }
+
+        function markOccupied(receiptNum) {
+            const receipt = receipts.find(r => r.number === receiptNum);
+            if (receipt) {
+                receipt.occupied = true;
+                updateReceiptsContainer(); 
+                document.getElementById("next-receipt-number").innerText = Math.max(receiptNumber, receiptNum + 1); 
+            }
+        }
+
+        document.getElementById("reset-button").addEventListener("click", function() {
+            receipts.length = 0; 
+            receiptNumber = 1; 
+            document.getElementById("reservation-success").style.display = "none";
+            document.getElementById("receipt").style.display = "none";
+            document.getElementById("receipts-container").innerHTML = ""; 
+            document.getElementById("next-receipt-number").innerText = receiptNumber; 
+            document.getElementById("reservation-form").reset(); 
+        });
+    </script>
+</body>
+</html>

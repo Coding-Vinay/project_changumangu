@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changu Mangu Family Restaurant</title>
+    <style>
+    body {
+        font-family: 'Verdana', sans-serif;
+        background-color: #ffffff; 
+        color: #333; 
+        margin: 0;
+        padding: 20px;
+    }
+    center {
+        margin: 30px 0;
+    }
+    h1 {
+        font-size: 2.5em;
+        color: #e74c3c; 
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        margin: 10px 0;
+        animation: fadeIn 1s ease-in-out; 
+    }
+    marquee {
+        color: #e74c3c;
+        font-size: 1.5em;
+        padding: 10px 0;
+        font-weight: bold;
+        animation: slide 10s linear infinite; 
+    }
+    nav {
+        background-color: #2c3e50; 
+        padding: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+        animation: slideIn 0.5s ease; 
+    }
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+    nav a {
+        color: #ffffff; 
+        text-decoration: none;
+        padding: 12px 20px;
+        margin: 0 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    nav a:hover {
+        background-color: #e74c3c; 
+        transform: scale(1.1); 
+        animation: pulse 0.3s infinite alternate;
+    }
+    p {
+        line-height: 1.7;
+        margin: 20px 0;
+        text-align: center;
+        font-size: 1.1em;
+        animation: fadeInUp 1s ease; 
+    }
+    span {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+        font-style: italic;
+    }
+    img {
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+        transition: transform 0.3s;
+        animation: bounceIn 0.5s; 
+    }
+    img:hover {
+        transform: scale(1.05);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slide {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+    }
+    @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
+    @keyframes bounceIn {
+        0% { transform: scale(0.5); opacity: 0; }
+        50% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); }
+    }
+    footer{
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <center><img src="../Images/logo.png" alt="changu Mangu Restaurant" width="200"></center>
+    <marquee><h1>CHANGU MANGU FAMILY RESTAURANT</h1></marquee>
+    <nav>
+        <ul>
+            <a href="menu.html">Menu</a> &nbsp;
+            <a href="reservation.html">Reservation</a> &nbsp;
+            <a href="hiring.html">Staff Hiring</a>
+        </ul>
+    </nav>
+    <p>
+        Dear Guest,<br><br>
+        We Welcome you to changu mangu family restaurant! <br><br>
+        We are building this brand with so much of love and passion and thus we want everyone to have amazing experience here. Our heart is filled with maximum gratitude for our guests for giving us the opportunity to serve them every now and then. We have grown to more than 10 outlets serving more than
+        one lakh guests every month. This would not have been possible
+        without love and support from our guests like you. <br><br>
+        Any of our kitchen prepares more than 100 dishes everyday. 
+        There can be something wrong due to any human error. 
+        We assure you that if anything goes wrong we will make it fine 
+        and rebuild your experience here.
+        For any feedback you can reach us at <a href="mailto:harshkumarmishra2006@gmail.com">harshkumarmishra2006@gmail.com</a>
+        or connect with our operations team at +91 91228XXXXX.
+        Wishing you a great experience here.<br><br>
+        <span>From the Management<br>
+        Changu Mangu Family Restaurant...!</span>
+     </p>
+     <footer>&copy; Changu Mangu Family Restaurant ; 2024</footer>
+    <script src="script.js"></script>
+</body>
+</html>
